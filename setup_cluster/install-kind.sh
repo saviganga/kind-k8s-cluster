@@ -1,31 +1,31 @@
 #!/bin/bash
 
-# check the architecture of the system 
-if [ $(uname -m) = "x86_64" ] then
-    
-    # check if kind is already installed
-    if [! command -v kind &>/dev/null] then
-        curl -Lo ./kind 'https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64' 
-    else
-        echo "kind is already installed"
-    fi
+# Check the architecture of the system 
+if [ "$(uname -m)" = "x86_64" ]; then
+    ARCH="amd64"
+elif [ "$(uname -m)" = "aarch64" ]; then
+    ARCH="arm64"
 else
-    if [$(uname -m) = "aarch64"] then
-
-        if [! command -v kind &>/dev/null] then
-            curl -Lo ./kind 'https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-arm64'
-        else
-            echo "kind is already installed"
-        fi
-    fi
+    echo "Unsupported architecture"
+    exit 1
 fi
 
-# make the downloaded package executable
-chmod +x ./kind
+# Check if kind is already installed
+if ! command -v kind &>/dev/null; then
+    # Download the appropriate kind binary based on architecture
+    KIND_VERSION="v0.20.0"
+    KIND_URL="https://kind.sigs.k8s.io/dl/$KIND_VERSION/kind-linux-$ARCH"
+    
+    # Download kind
+    curl -Lo ./kind "$KIND_URL"
 
-# move the downloaded package to an application directory
-sudo mv ./kind /bin/kind
+    # Make the downloaded package executable
+    chmod +x ./kind
 
-echo "Successfully installed kind"
+    # Move the downloaded package to an application directory
+    sudo mv ./kind /usr/local/bin/kind
 
-
+    echo "Successfully installed kind"
+else
+    echo "kind is already installed"
+fi
