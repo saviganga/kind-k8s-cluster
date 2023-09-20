@@ -89,7 +89,7 @@ fi
 kind create cluster --name $CLUSTER_NAME
 
 # Select the config file to be used for this cluster (the one just created by kind)
-kubectl config use-context $CLUSTER_NAME
+kubectl config use-context kind-$CLUSTER_NAME
 kubectl cluster-info --context kind-$CLUSTER_NAME
 
 echo "Kind cluster successfully created"
