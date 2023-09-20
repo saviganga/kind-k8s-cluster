@@ -60,4 +60,17 @@ else
     echo "Installing $KUBECTL ..."
 
     # Download the latest kubectl release for your architecture
-    curl -LO "$KUBECT
+    curl -LO "$KUBECTL_LATEST_RELEASE_URL"
+
+    # Install kubectl
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+fi
+
+# Install kind
+kind create cluster --name $CLUSTER_NAME
+
+# Select the config file to be used for this cluster (the one just created by kind)
+kubectl config use-context $CLUSTER_NAME
+kubectl cluster-info --context kind-$CLUSTER_NAME
+
+echo "Kind cluster successfully created"
