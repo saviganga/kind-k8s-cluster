@@ -31,14 +31,17 @@ jobs:
 
         # Compare the current and previous commit hashes
         if [ "$COMMIT_HASH" != "$PREVIOUS_COMMIT_HASH" ]; then
+          
           # Only build and tag the image if there are differences
           docker build . --file Dockerfile --tag ${{secrets.IMAGE_NAME}}:$COMMIT_HASH
+          
           # Set the COMMIT_HASH as an environment variable for later steps
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
+        
         else
+        
           echo "No code changes detected. Skipping image build."
-        else
-          echo "No code changes detected. Skipping image build."
+        
         fi
       shell: bash
 
