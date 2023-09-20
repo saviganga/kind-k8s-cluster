@@ -22,7 +22,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Build the docker image
-      run: docker build ./hello-world-node-express --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
+      run: docker build ./hello-world-node-express --file Dockerfile --tag saviganga/ignitedotdev-node-express:$(date +%s)
 
     - name: Docker push
       run: docker push ${{secrets.IMAGE_NAME}}
