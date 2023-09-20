@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  ignite:
+    build: ./hello-world-node-express
+    command: node app.js
+    volumes:
+      - ./hello-world-node-express:/usr/src/app
+    ports:
+      - "3000:3000"
