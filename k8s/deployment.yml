@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hello-world-node-express
-          image: saviganga/ignitedotdev-node-express
+          image: IMAGE_NAME
           ports:
-            - containerPort: 3000
+            - containerPort: CONTAINER_PORT
            
