@@ -3,6 +3,8 @@ version: 2.1
 
 executors:
   docker-publisher:
+    environment:
+      IMAGE_NAME: saviganga/ignitedotdev-node-express
     docker:
       - image: saviganga/ignitedotdev-node-express
 
