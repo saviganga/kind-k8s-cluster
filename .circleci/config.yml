@@ -3,10 +3,8 @@ version: 2.1
 
 executors:
   docker-publisher:
-    environment:
-      IMAGE_NAME: saviganga/kind-cluster-ignite
     docker:
-      - image: saviganga/kind-cluster-ignite
+      - image: saviganga/ignitedotdev-node-express
 
 jobs:
   build:
