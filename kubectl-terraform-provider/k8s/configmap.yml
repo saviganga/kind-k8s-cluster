@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: hello-world-node-express-config
 data:
-  IMAGE_NAME: "saviganga/ignitedotdev-node-express"
+  IMAGE_NAME: "saviganga/multi"
   CONTAINER_PORT: "3000"
   APP_DOMAIN: "gangaboys.com"
