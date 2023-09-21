@@ -29,3 +29,10 @@ if ! command -v kind &>/dev/null; then
 else
     echo "kind is already installed"
 fi
+
+
+# Check if the cluster already exists
+# if kind get clusters | grep -q "$CLUSTER_NAME"; then
+#   echo "Cluster $CLUSTER_NAME already exists. Deleting it..."
+#   kind delete cluster --name "$CLUSTER_NAME"
+# fi

@@ -22,9 +22,9 @@ KUBECTL_CHECKSUM_URL="https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/s
 echo "Creating kind cluster..."
 
 # Check if Docker is installed
-dpkg -s $DOCKER &> /dev/null
+# dpkg -s $DOCKER &> /dev/null
 
-if [ $? -eq 0 ]; then
+if ! command -v $DOCKER &>/dev/null; then
     echo "$DOCKER is installed, moving on ..."
 else
     echo "Installing $DOCKER ..."
@@ -41,9 +41,6 @@ else
     sudo apt-get install -y docker-ce
     # sudo systemctl status docker
 
-    
-    
-    
     # Update APT cache and install Docker
     sudo apt update
     sudo apt --yes --no-install-recommends install "docker-ce docker-ce-cli containerd.io"
@@ -66,14 +63,14 @@ else
         sudo wget --output-document=/etc/bash_completion.d/docker-compose "https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose"
         echo "Docker Compose successfully installed"
     else
-        echo "Docker Compose is already installed"
+        echo "Docker Compose is already installed..."
     fi
 fi
 
 # Check if kubectl is installed
 dpkg -s $KUBECTL &> /dev/null
 
-if [ $? -eq 0 ]; then
+if ! command -v $KUBECTL &> /dev/null; then
     echo "$KUBECTL is installed, moving on ..."
 else
     echo "Installing $KUBECTL ..."
@@ -85,11 +82,17 @@ else
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 fi
 
-# Install kind
-kind create cluster --name $CLUSTER_NAME
+if kind get clusters | grep -q "$CLUSTER_NAME"; then
+    echo "Deleting existing cluster with clashing name"
+    kind delete cluster --name $CLUSTER_NAME
+else
+    # Install kind
+    kind create cluster --name $CLUSTER_NAME
+fi
 
 # Select the config file to be used for this cluster (the one just created by kind)
 kubectl config use-context kind-$CLUSTER_NAME
+kind get kubeconfig --name "$CLUSTER_NAME" > "$HOME/.kube/$CLUSTER_NAME"
 kubectl cluster-info --context kind-$CLUSTER_NAME
 
 echo "Kind cluster successfully created"
