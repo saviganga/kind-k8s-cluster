@@ -1,7 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-service
+  name: svc
 spec:
-  type: ExternalName
-  externalName: "gangaboys.com"
+  selector:
+    app: hello-world-node-express
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer
