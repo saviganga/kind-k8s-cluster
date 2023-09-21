@@ -14,5 +14,5 @@ COPY hello-world-node-express .
 EXPOSE 3000
 
 # start up the application
-CMD ["npm", "start"]
+CMD ["node", "app.js"]
 
