@@ -1,4 +1,4 @@
-FROM arm64v8/node:14
+FROM node:14
 
 # create the app directory
 WORKDIR /usr/src/app/ganga
