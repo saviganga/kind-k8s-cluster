@@ -4,4 +4,4 @@ metadata:
   name: external-service
 spec:
   type: ExternalName
-  externalName: APP_DOMAIN
+  externalName: "gangaboys.com"
