@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hello-world-node-express
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: hello-world-node-express
@@ -17,7 +17,6 @@ spec:
       containers:
         - name: hello-world-node-express
           image: saviganga/ignitedotdev-node-express
-          command: ['npm', 'start']
           ports:
             - containerPort: 3000
           
