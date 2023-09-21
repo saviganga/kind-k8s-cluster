@@ -1,4 +1,4 @@
-FROM node:18
+FROM --platform=linux/amd64 node:18
 
 # create the app directory
 WORKDIR /usr/src/app/ganga
