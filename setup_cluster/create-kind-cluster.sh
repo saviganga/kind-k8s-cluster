@@ -85,23 +85,23 @@ else
 fi
 
 # Check if kubectl is installed
-dpkg -s $KUBECTL &> /dev/null
 
-if ! command -v $KUBECTL &> /dev/null; then
-    echo "$KUBECTL is installed, moving on ..."
-else
-    echo "Installing $KUBECTL ..."
+#if ! command -v $KUBECTL &> /dev/null; then
+#    echo "$KUBECTL is installed, moving on ..."
+#else
+#    echo "Installing $KUBECTL ..."
 
     # Download the latest kubectl release for your architecture
-    curl -LO "$KUBECTL_LATEST_RELEASE_URL"
+#    curl -LO "$KUBECTL_LATEST_RELEASE_URL"
 
     # Install kubectl
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-fi
+#    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+#fi
 
 if kind get clusters | grep -q "$CLUSTER_NAME"; then
     echo "Deleting existing cluster with clashing name"
     kind delete cluster --name $CLUSTER_NAME
+    kind create cluster --name $CLUSTER_NAME
 else
     # Install kind
     kind create cluster --name $CLUSTER_NAME
@@ -109,7 +109,9 @@ fi
 
 # Select the config file to be used for this cluster (the one just created by kind)
 kubectl config use-context kind-$CLUSTER_NAME
-kind get kubeconfig --name "$CLUSTER_NAME" > "$HOME/.kube/$CLUSTER_NAME"
+mkdir $HOME/.kube & cd $HOME/.kube && touch $CLUSTER_NAME 
+kind get kubeconfig --name "$CLUSTER_NAME" > $HOME/.kube/$CLUSTER_NAME
+cat $HOME/.kube/$CLUSTER_NAME
 kubectl cluster-info --context kind-$CLUSTER_NAME
 
 echo "Kind cluster successfully created"
