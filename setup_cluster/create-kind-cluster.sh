@@ -10,6 +10,7 @@ elif echo "${amd[@]}" | grep -qw "$(uname -m)"; then
 else
     echo "Unsupported architecture"
     exit 1
+fi
 
 
 # # Check the architecture of the system 
