@@ -1,5 +1,17 @@
 #!/bin/bash
 
+arm=("arm64" "aarch64")
+amd=("amd64")
+
+if echo "${arm[@]}" | grep -qw "$(uname -m)"; then
+    ARCH="arm64"
+elif echo "${amd[@]}" | grep -qw "$(uname -m)"; then
+    ARCH="amd64"
+else
+    echo "Unsupported architecture"
+    exit 1
+
+
 # # Check the architecture of the system 
 # if [ "$(uname -m)" = "x86_64" ]; then
 #     ARCH="amd64"
@@ -10,7 +22,7 @@
 #     exit 1
 # fi
 
-ARCH=$(uname -m)
+# ARCH=$(uname -m)
 
 echo " $ARCH "
 
