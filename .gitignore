@@ -68,3 +68,4 @@ override.tf.json
 terraform.rc
 kubectl-terraform-provider/.terraform.lock.hcl
 # *.terraform
+kubectl-terraform-provider/*.terraform
