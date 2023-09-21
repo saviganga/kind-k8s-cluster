@@ -1,14 +1,18 @@
 #!/bin/bash
 
-# Check the architecture of the system 
-if [ "$(uname -m)" = "x86_64" ]; then
-    ARCH="amd64"
-elif [ "$(uname -m)" = "aarch64" ]; then
-    ARCH="arm64"
-else
-    echo "Unsupported architecture"
-    exit 1
-fi
+# # Check the architecture of the system 
+# if [ "$(uname -m)" = "x86_64" ]; then
+#     ARCH="amd64"
+# elif [ "$(uname -m)" = "aarch64" ]; then
+#     ARCH="arm64"
+# else
+#     echo "Unsupported architecture"
+#     exit 1
+# fi
+
+ARCH=$(uname -m)
+
+echo " $ARCH "
 
 # Define the cluster name
 CLUSTER_NAME='ignitedotdev'
