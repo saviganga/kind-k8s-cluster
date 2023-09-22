@@ -15,5 +15,5 @@ variable "K8S_SERVICE_FILE_PATH" {
 
 variable "CONFIG_FILE_PATH" {
   type    = string
-  default = "./config"
+  default = "~/.kube/$CLUSTER_NAME"
 }
