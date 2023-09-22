@@ -1,7 +1,7 @@
 FROM node:14
 
 # create the app directory
-WORKDIR /usr/src/app/ganga
+WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY hello-world-node-express/package*.json ./
@@ -14,5 +14,5 @@ COPY hello-world-node-express .
 EXPOSE 3000
 
 # start up the application
-CMD ["node", "ganga/app.js"]
+CMD ["npm", "start"]
 
