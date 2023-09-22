@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# # Check the architecture of the system 
-# if [ "$(uname -m)" = "x86_64" ]; then
-#     ARCH="amd64"
-# elif [ "$(uname -m)" = "aarch64" ]; then
-#     ARCH="arm64"
-# else
-#     echo "Unsupported architecture"
-#     exit 1
-# fi
+arm=("arm64" "aarch64")
+amd=("amd64")
 
-ARCH=$(uname -m)
+if echo "${arm[@]}" | grep -qw "$(uname -m)"; then
+    ARCH="arm64"
+elif echo "${amd[@]}" | grep -qw "$(uname -m)"; then
+    ARCH="amd64"
+else
+    echo "Unsupported architecture"
+    exit 1
+fi
 
 echo " $ARCH "
 # Check if kind is already installed
