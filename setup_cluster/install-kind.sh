@@ -11,21 +11,21 @@ else
 fi
 
 # Check if kind is already installed
-if ! command -v kind &>/dev/null; then
-    # Download the appropriate kind binary based on architecture
-    KIND_VERSION="v0.20.0"
-    KIND_URL="https://kind.sigs.k8s.io/dl/$KIND_VERSION/kind-linux-$ARCH"
-    
-    # Download kind
-    curl -Lo ./kind "$KIND_URL"
+# if ! command -v kind &>/dev/null; then
+# Download the appropriate kind binary based on architecture
+KIND_VERSION="v0.20.0"
+KIND_URL="https://kind.sigs.k8s.io/dl/$KIND_VERSION/kind-linux-$ARCH"
 
-    # Make the downloaded package executable
-    chmod +x ./kind
+# Download kind
+curl -Lo ./kind "$KIND_URL"
 
-    # Move the downloaded package to an application directory
-    sudo mv ./kind /usr/local/bin/kind
+# Make the downloaded package executable
+chmod +x ./kind
 
-    echo "Successfully installed kind"
-else
-    echo "kind is already installed"
-fi
+# Move the downloaded package to an application directory
+sudo mv ./kind /usr/local/bin/kind
+
+#     echo "Successfully installed kind"
+# else
+#     echo "kind is already installed"
+# fi
