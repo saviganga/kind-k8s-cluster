@@ -1,18 +1,15 @@
 #!/bin/bash
 
-arm=("arm64" "aarch64")
-amd=("amd64")
-
-if echo "${arm[@]}" | grep -qw "$(uname -m)"; then
-    ARCH="arm64"
-elif echo "${amd[@]}" | grep -qw "$(uname -m)"; then
+# Check the architecture of the system 
+if [ "$(uname -m)" = "x86_64" ]; then
     ARCH="amd64"
+elif [ "$(uname -m)" = "aarch64" ]; then
+    ARCH="arm64"
 else
     echo "Unsupported architecture"
     exit 1
 fi
 
-echo " $ARCH "
 # Check if kind is already installed
 if ! command -v kind &>/dev/null; then
     # Download the appropriate kind binary based on architecture
@@ -32,10 +29,3 @@ if ! command -v kind &>/dev/null; then
 else
     echo "kind is already installed"
 fi
-
-
-# Check if the cluster already exists
-# if kind get clusters | grep -q "$CLUSTER_NAME"; then
-#   echo "Cluster $CLUSTER_NAME already exists. Deleting it..."
-#   kind delete cluster --name "$CLUSTER_NAME"
-# fi
