@@ -12,4 +12,5 @@ sleep 2
 #2. use 'kubectl' terraform provider to deploy the dockerized node.js express application to the kubernetes cluster
 echo "deploying environment"
 sleep 2
-./kubectl-terraform-provider terraform apply
+cd ./kubectl-terraform-provider
+terraform apply
