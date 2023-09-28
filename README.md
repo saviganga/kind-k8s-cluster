@@ -2,7 +2,11 @@
 
 - SUMMARY
 
-This repository deploys a simple Hello World express node.js application to a local kinD kubernetes cluster using the kubectl terraform provider
+This repository deploys a simple Hello World express node.js application to a local kinD kubernetes cluster using the kubectl terraform provider.
+
+A CI/CD pipeline has been set to commit the docker image created by the dockerfile to a dockerhub repository on every push/commit to the main branch
+
+When the environment is deployed (using 'terraform apply'), the docker image is pulled, and used to run the application within the cluster
 
 - DIRECTORY EXPLANATION
 
